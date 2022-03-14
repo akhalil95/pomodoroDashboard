@@ -1,0 +1,827 @@
+:root {
+  --primary-red: #f87070;
+  --primary-teal: #70f3f8;
+  --primary-purple: #d881f8;
+  --text-color: #d7e0ff;
+  --dark-background: #1e213f;
+  --light-background: #ffffff;
+  --dark-accent: #16193200;
+  --light-accent: #eff1fa;
+
+  --kumbhsans-font: Kumbh Sans, sans-serif;
+  --robotoslab-font: Roboto Slab, serif;
+  --spacemono-font: Space Mono, monospace;
+
+  --input-border: var(--light-accent);
+  --input-focus: var(--primary-red);
+  --input-arrow: var(--input-border);
+}
+
+body {
+  background: no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 0px 0px 20px #242424;
+  min-height: 100vh;
+  overflow: hidden;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+
+  letter-spacing: 15px;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+/* =======
+Grid Settings
+========== */
+.container-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr 0.9fr 1fr;
+  grid-template-rows: 0.3fr 0.3fr 0.3fr 0.3fr 0.3;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'Weather Pomodoro Pomodoro Pomodoro  Time'
+    'Notes Pomodoro Pomodoro Pomodoro Todo'
+    'Notes Pomodoro Pomodoro Pomodoro Todo'
+    /* '. Quotes Quotes Quotes .' */
+    'Footer Footer Footer Footer Footer';
+}
+
+.Weather {
+  grid-area: Weather;
+  color: var(--text-color);
+  margin: 20px;
+  font-size: 20px;
+}
+
+.Time {
+  grid-area: Time;
+  color: var(--text-color);
+  margin: 20px;
+  font-size: 30px;
+}
+
+.Pomodoro {
+  grid-area: Pomodoro;
+}
+
+/* .Quotes {
+  grid-area: Quotes;
+} */
+
+.Notes {
+  grid-area: Notes;
+}
+
+.Todo {
+  grid-area: Todo;
+}
+
+.Footer {
+  grid-area: Footer;
+}
+
+/* =========
+Pomodoro
+============ */
+.Pomodoro {
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: var(--set-font-style);
+}
+
+button {
+  margin: 0;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 26.5px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.75rem 0.75rem;
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+/* @media screen and (min-width: 768px) {
+  button {
+    font-size: 16px;
+  }
+} */
+
+button:hover {
+  background-color: var(--set-theme-primary);
+  filter: brightness(120%);
+}
+
+/**********************
+    CUSTOM INPUT STYLES
+  ***********************/
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+input[type='number'] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+.settings__set-time--input {
+  border: none;
+  border-radius: 5px;
+  font-family: Helvetica, sans-serif;
+  font-size: 1em;
+  line-height: 1em;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.4s ease-in-out;
+  width: 100%;
+  padding: 0.15rem;
+  background-color: var(--light-accent);
+  display: flex;
+  align-items: center;
+}
+
+.settings__set-time--input:hover,
+.settings__set-time--input:focus,
+.settings__set-time--input:active {
+  cursor: pointer;
+  stroke: var(--dark-accent);
+}
+
+.settings__controls > button {
+  padding: 0.35rem 0.5rem;
+}
+
+.settings__controls > button:hover {
+  background-color: transparent;
+  filter: none;
+}
+
+.settings__controls {
+  display: flex;
+  flex-direction: column;
+}
+
+#svg:hover {
+  stroke: var(--dark-accent);
+}
+
+.up-arrow {
+  z-index: 1;
+  display: block;
+  padding: 0;
+  opacity: 0.25;
+}
+
+.up-arrow:hover,
+.down-arrow:hover {
+  opacity: 1;
+}
+
+.down-arrow {
+  z-index: 1;
+  display: block;
+  padding: 0;
+  opacity: 0.25;
+}
+
+/**********************
+    CUSTOM RADIO STYLES
+  ***********************/
+/* radio border on hover */
+.radio {
+  width: 52px;
+  height: 52px;
+  padding: 0.15rem;
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio:hover {
+  border: 1px solid var(--light-accent);
+}
+
+/* Customize the label (the container) */
+.radio-container {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* Hide the browser's default radio */
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio */
+.color-checkmark,
+.font-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: var(--light-accent);
+}
+
+/* Create the color-checkmark/indicator (hidden when not checked) */
+.color-checkmark:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.font-checkmark:after {
+  content: 'Aa';
+  font-size: 0.75rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type='radio']:focus {
+  outline: 3px solid paleturquoise;
+  outline-offset: 2px;
+}
+
+/* Show the color-checkmark when checked */
+.radio-container input:checked ~ .color-checkmark:after {
+  display: block;
+}
+
+.radio-container input:checked ~ .font-checkmark {
+  background-color: var(--dark-background);
+  color: var(--light-accent);
+}
+
+/* Style the color-checkmark/indicator */
+.radio-container .color-checkmark:after {
+  left: 16px;
+  top: 12px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--dark-accent);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.font:checked {
+  background-color: turquoise;
+}
+
+#kumbh-sans {
+  font-family: var(--kumbhsans-font);
+}
+
+#roboto-slab {
+  font-family: var(--robotoslab-font);
+}
+
+#space-mono {
+  font-family: var(--spacemono-font);
+}
+
+.red {
+  background-color: var(--primary-red);
+}
+.teal {
+  background-color: var(--primary-teal);
+}
+.purple {
+  background-color: var(--primary-purple);
+}
+
+/**********************
+    UTILITY CLASSES
+  ***********************/
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+/**********************
+    CONTROL BUTTONS
+  ***********************/
+.control__buttons {
+  background-color: var(--dark-accent);
+  margin: 2rem auto;
+  border-radius: 26.5px;
+  padding: 0.75rem;
+}
+
+.btn--state-active {
+  background-color: var(--set-theme-primary);
+  color: var(--dark-background);
+}
+
+/**********************
+    TIMER 
+  ***********************/
+.timer {
+  margin: 3rem auto;
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 1rem;
+  background-image: linear-gradient(to bottom right, #0e112a00, #2e325a00);
+  box-shadow: -40px -27px 42px 5px #0a0a0a1a;
+}
+
+@media screen and (min-width: 400px) {
+  .timer {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .timer {
+    width: 225px;
+    height: 225px;
+  }
+}
+
+.timer__circle-wrap {
+  position: relative;
+  background-color: var(--dark-accent);
+  background-color: var(--dark-accent);
+  border-radius: 50%;
+  padding: 0.25rem;
+}
+
+.timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.timer__path-elapsed {
+  stroke-width: 4px;
+  stroke: var(--set-theme-primary);
+  stroke-linecap: round;
+}
+
+.timer__time-left {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+@media screen and (min-width: 768px) {
+  .timer__time-left {
+    position: absolute;
+    bottom: 55%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+}
+
+.timer__controls {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 165%);
+}
+
+@media screen and (min-width: 768px) {
+  .timer__controls {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 190%);
+  }
+}
+
+.timer__controls-btn {
+  display: flex;
+  justify-content: center;
+  line-height: 16px;
+  letter-spacing: 15px;
+  text-indent: 15px;
+  text-transform: uppercase;
+}
+
+.min-sec {
+  margin: 0;
+  font-size: 50px;
+}
+
+@media (min-width: 768px) {
+  .min-sec {
+    font-size: 65px;
+  }
+}
+
+/**********************
+    SETTINGS 
+  ***********************/
+.settings__icon button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.settings__icon button img {
+  margin-right: 0.25rem;
+}
+
+.settings {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translate(0, 0);
+}
+
+.settings.show-modal {
+  display: flex;
+}
+
+.settings__inner {
+  background-color: var(--light-background);
+  color: rgba(0, 0, 0, 0.582);
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  max-width: 600px;
+  /* Puts the modal box in the middle */
+  transform: translate(-50%, -50%);
+}
+
+.settings__top {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+  padding: 20px 30px;
+  border-bottom: 1px solid #e3e1e1;
+}
+
+.settings__close-btn {
+  display: flex;
+  opacity: 0.5;
+}
+
+.settings__close-btn:hover {
+  display: flex;
+  opacity: 1;
+}
+
+.settings__body-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 30px;
+}
+
+@media (min-width: 768px) {
+  .settings__body-wrapper > h4 {
+    text-align: left;
+  }
+}
+
+.settings__set-time {
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: center;
+  padding-bottom: 26px;
+  margin-top: 26px;
+  border-bottom: 1px solid #e3e1e1;
+  color: #82848a;
+}
+
+@media (min-width: 768px) {
+  .settings__set-time {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .input-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+}
+
+.settings__fonts-wrapper,
+.settings__colors-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3e1e1;
+  color: #82848a;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .settings__fonts-wrapper,
+  .settings__colors-wrapper {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+.settings__colors-wrapper {
+  border-bottom: none;
+  position: relative;
+}
+
+.settings__fonts-heading,
+.settings__colors-heading {
+  color: rgba(0, 0, 0, 0.568);
+}
+
+@media (min-width: 768px) {
+  .settings__fonts-heading,
+  .settings__colors-heading {
+    justify-self: start;
+  }
+}
+
+.settings__fonts,
+.settings__colors {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.settings__body-wrapper {
+  position: relative;
+}
+
+.settings__apply-btn {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  position: relative;
+  background-color: var(--set-theme-primary);
+  color: var(--light-accent);
+  padding: 0.75rem 2.75rem;
+}
+
+/* ========
+Todo
+========== */
+.Todo {
+  margin: 0;
+  min-width: 250px;
+}
+
+.todo-container {
+  position: absolute;
+  height: 25pc;
+  width: 20pc;
+  margin: auto;
+  top: 0;
+  right: 0;
+  left: 1000px;
+  bottom: 0;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 55px black;
+}
+
+.list {
+  position: absolute;
+  height: 75%;
+  width: 100%;
+  margin: auto;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.list::-webkit-scrollbar {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.element {
+  position: relative;
+  height: fit-content;
+  width: 55%;
+  right: 0;
+  left: 0;
+  text-align: left;
+  transition: 0.2s;
+  padding: 10px;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  padding-right: 80px;
+  word-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Remove margins and padding from the list */
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: transparent;
+  font-size: 18px;
+  transition: 0.2s;
+
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+  background: transparent;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+  background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  background: transparent;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: transparent;
+  color: white;
+}
+
+/* Style the header */
+.header {
+  background-color: transparent;
+  padding: 30px 40px;
+  color: black;
+  text-align: center;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+#myInput {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: transparent;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
